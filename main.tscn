@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://djxgy5x8p0jl0"]
+
+[ext_resource type="Texture2D" uid="uid://cmay8vonsisp" path="res://art/tiles.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b83ffay4pb5to" path="res://scripts/island.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dyrrc4ko7c56d" path="res://menu_select.gd" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://b8r76l31grn7l" path="res://art/menus/menuDirt.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://qx6nci28j22" path="res://art/highlight.png" id="3_kek77"]
+[ext_resource type="AudioStream" uid="uid://bae4kq5w6mbcy" path="res://art/audio/explosion (1).wav" id="4_4c57u"]
+[ext_resource type="Texture2D" uid="uid://c21ugjc3oixe0" path="res://art/menus/menuGrass.png" id="5_5vw27"]
+[ext_resource type="AudioStream" uid="uid://b1rsc0bir7l8t" path="res://art/audio/bomboclat.wav" id="5_efxa6"]
+[ext_resource type="Texture2D" uid="uid://c312kiqj1n704" path="res://art/menus/menuStone.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://crpd7qqgnein0" path="res://art/menus/menuSand.png" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://b1euluewsm7pa" path="res://art/menus/menuBulldoze.png" id="8_efxa6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
+texture = ExtResource("1_ig7tw")
+texture_region_size = Vector2i(64, 48)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSet" id="TileSet_21vtg"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(64, 32)
+sources/0 = SubResource("TileSetAtlasSource_0xm2m")
+
+[node name="Main" type="Node2D" unique_id=1640321127]
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=985784954 node_paths=PackedStringArray("menu")]
+tile_set = SubResource("TileSet_21vtg")
+script = ExtResource("2_0xm2m")
+menu = NodePath("../UI/MenuSelect")
+
+[node name="Outline" type="Sprite2D" parent="Ground" unique_id=393602327]
+texture = ExtResource("3_kek77")
+
+[node name="PlaceSound" type="AudioStreamPlayer" parent="Ground" unique_id=656566913]
+stream = ExtResource("4_4c57u")
+volume_db = 9.701
+autoplay = true
+
+[node name="DestroySound" type="AudioStreamPlayer" parent="Ground" unique_id=1806354216]
+stream = ExtResource("5_efxa6")
+volume_db = 7.364
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1220218040]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1212081439]
+
+[node name="MenuSelect" type="Control" parent="UI" unique_id=1419281345]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_1bvp3")
+wheel_images = Array[Texture2D]([ExtResource("3_h2yge"), ExtResource("5_5vw27"), ExtResource("6_kek77"), ExtResource("7_4c57u"), ExtResource("8_efxa6")])
+
+[node name="Wheel" type="TextureRect" parent="UI/MenuSelect" unique_id=643775938]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h2yge")
